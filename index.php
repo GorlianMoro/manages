@@ -90,23 +90,25 @@ if (isset($_GET['drop']))
        $tab = $row['Tables_in_books'];
        $structure = $pdo->query("desc $tab ");
        foreach ($structure as $struct)
-       { ?>
+       {
+         $fil = $struct['Field'];
+         ?>
          <tr>
            <td><?php echo $struct['Field'] . "<br />"; ?></td>
            <td><?php echo $struct['Type'] . "<br />"; ?></td>
            <td>
-             <form class="" action="mainpage.php" metdod="get">
-               <input type="text" name="edittab" value="" placeholder="имя таблицы">
-               <input type="text" name="oldname" value="" placeholder="старое имя поля">
+             <form class="" action="index.php" metdod="get">
+               <input type="hidden" name="edittab" value="<?php echo $tab; ?>">
+               <input type="hidden" name="oldname" value="<?php echo $fil; ?>">
                <input type="text" name="newname" value="" placeholder="новое имя поля">
                <input type="text" name="typefield" value="" placeholder="тип поля">
                <input type="submit" name="edit" value="Изменить">
              </form>
            </td>
            <td>
-             <form class="" action="mainpage.php" metdod="get">
-               <input type="text" name="droptab" value="" placeholder="имя таблицы">
-               <input type="text" name="dropfield" value="" placeholder="имя поля">
+             <form class="" action="index.php" metdod="get">
+               <input type="hidden" name="droptab" value="<?php echo $tab; ?>">
+               <input type="hidden" name="dropfield" value="<?php echo $fil; ?>">
                <input type="submit" name="drop" value="Удалить">
              </form>
            </td>
